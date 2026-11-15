@@ -39,3 +39,5 @@ main{position:relative}.page-section{position:relative;z-index:1;max-width:1280p
 @media(max-width:780px){.hero-portrait-wrap{min-height:530px}.code-float{top:15%;left:-4%;bottom:auto;width:190px}}@media(max-width:430px){.hero-portrait-wrap{min-height:450px}.code-float{top:14%;left:-5.5%;width:130px;padding:9px 8px}.code-float code{font-size:7px;line-height:1.45;white-space:nowrap}}@media(max-width:360px){.code-float{left:-6.5%;width:125px;padding:8px 7px}.code-float code{font-size:6.5px}}@media(max-width:780px){.code-float:hover{transform:translate(-8px,-8px) rotate(0deg)}}@media(prefers-reduced-motion:reduce) and (max-width:780px){.code-float:hover{transform:rotate(-3deg)}}
 
 @media(max-width:780px){.code-float{cursor:grab;touch-action:none;user-select:none}.code-float.is-dragging{cursor:grabbing;transition:none;z-index:8}}
+
+@media(max-width:780px){.code-float code{white-space:nowrap;font-size:9px}}@media(max-width:430px){.code-float code{font-size:7px}}@media(max-width:360px){.code-float code{font-size:6.5px}}
