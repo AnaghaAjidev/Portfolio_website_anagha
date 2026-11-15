@@ -290,8 +290,8 @@ function App() {
           <motion.div className="hero-actions" variants={heroItem}>
             <button className="primary-button" onClick={() => go('projects')}>View my work <ArrowUpRight size={17} /></button>
             <a className="secondary-button" href="/Anagha_Ajidev_Resume.pdf" download>Resume <Download size={16} /></a>
-            <a className="social-button" href="https://github.com/AnaghaAjidev" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a>
-            <a className="social-button" href="https://www.linkedin.com/in/anagha-ajidev" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19} /></a>
+            <div className="social-links"><a className="social-button" href="https://github.com/AnaghaAjidev" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a>
+            <a className="social-button" href="https://www.linkedin.com/in/anagha-ajidev" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19} /></a></div>
           </motion.div>
           <motion.div className="hero-location" variants={heroItem}><MapPin size={14} /> Kerala, India <i /> MCA · 2025—2027</motion.div>
         </motion.div>

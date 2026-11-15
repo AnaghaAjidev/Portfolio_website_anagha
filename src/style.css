@@ -33,3 +33,5 @@ main{position:relative}.page-section{position:relative;z-index:1;max-width:1280p
 .skill-orbit-wrap{--skill-tilt-x:0deg;--skill-tilt-y:0deg;transform:perspective(1000px) rotateX(var(--skill-tilt-y)) rotateY(var(--skill-tilt-x));transform-origin:center;transition:transform .3s cubic-bezier(.2,.75,.25,1);will-change:transform}@media(prefers-reduced-motion:reduce){.skill-orbit-wrap{transform:none;transition:none;will-change:auto}}
 
 .orbit-tag{transition:translate .24s ease,scale .24s ease,border-color .24s ease,box-shadow .24s ease}.orbit-tag:hover{translate:4px -6px;scale:1.08;border-color:rgba(52,207,225,.58);box-shadow:0 10px 30px rgba(16,136,175,.26);z-index:4}@media(prefers-reduced-motion:reduce){.orbit-tag{transition:none}.orbit-tag:hover{translate:0 0;scale:1}}
+
+.social-links{display:contents}@media(max-width:780px){.hero-actions .social-links{display:flex;flex-basis:100%;gap:8px}}
