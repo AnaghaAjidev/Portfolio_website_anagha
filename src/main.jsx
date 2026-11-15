@@ -192,7 +192,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [typed, setTyped] = useState('');
-  const [mobileCodePosition, setMobileCodePosition] = useState({ x: 0, y: 0, active: false });
+  const [codePosition, setCodePosition] = useState({ x: 0, y: 0, active: false });
   const [isCodeDragging, setIsCodeDragging] = useState(false);
   const codeDragRef = useRef(null);
   const heroRef = useRef(null);
@@ -252,13 +252,13 @@ function App() {
   };
 
   const startCodeCardDrag = (event) => {
-    if (!window.matchMedia('(max-width: 780px)').matches || (event.button !== undefined && event.button !== 0)) return;
+    if (event.button !== undefined && event.button !== 0) return;
     event.preventDefault();
     event.currentTarget.setPointerCapture?.(event.pointerId);
     codeDragRef.current = {
       pointerX: event.clientX,
       pointerY: event.clientY,
-      ...mobileCodePosition,
+      ...codePosition,
       cardRect: event.currentTarget.getBoundingClientRect(),
       parentRect: event.currentTarget.parentElement.getBoundingClientRect()
     };
@@ -270,8 +270,9 @@ function App() {
     const { cardRect, parentRect } = codeDragRef.current;
     const deltaX = event.clientX - codeDragRef.current.pointerX;
     const deltaY = event.clientY - codeDragRef.current.pointerY;
-    setMobileCodePosition({
-      x: codeDragRef.current.x + Math.min(parentRect.right - cardRect.right, Math.max(parentRect.left - cardRect.left, deltaX)),
+    const minX = Math.min(0, parentRect.left - cardRect.left);
+    setCodePosition({
+      x: codeDragRef.current.x + Math.min(parentRect.right - cardRect.right, Math.max(minX, deltaX)),
       y: codeDragRef.current.y + Math.min(parentRect.bottom - cardRect.bottom, Math.max(parentRect.top - cardRect.top, deltaY)),
       active: true
     });
@@ -334,7 +335,7 @@ function App() {
           <div className="portrait-aura" />
           <div className="orbit orbit-a" /><div className="orbit orbit-b" />
           <TiltCard className="hero-portrait"><img src="/anagha-professional.webp" alt="Anagha Ajidev, full-stack developer" fetchPriority="high" decoding="async" /><span className="portrait-caption">FIG. 01 — BEHIND THE CODE</span></TiltCard>
-          <div className={`code-float${isCodeDragging ? ' is-dragging' : ''}`} style={mobileCodePosition.active ? { transform: `translate(${mobileCodePosition.x}px, ${mobileCodePosition.y}px) rotate(-3deg)` } : undefined} onPointerDown={startCodeCardDrag} onPointerMove={moveCodeCard} onPointerUp={stopCodeCardDrag} onPointerCancel={stopCodeCardDrag} tabIndex={0} aria-label="Move the code card around the portrait on mobile"><div className="window-dots"><i /><i /><i /></div><code><span>const</span> anagha = {'{'}<br />&nbsp; role: <b>'Full-Stack Dev'</b>,<br />&nbsp; coffee: true<br />{'}'};</code></div>
+          <div className={`code-float${isCodeDragging ? ' is-dragging' : ''}`} style={codePosition.active ? { transform: `translate(${codePosition.x}px, ${codePosition.y}px) rotate(-3deg)` } : undefined} onPointerDown={startCodeCardDrag} onPointerMove={moveCodeCard} onPointerUp={stopCodeCardDrag} onPointerCancel={stopCodeCardDrag} tabIndex={0} aria-label="Move the code card around the portrait by dragging"><div className="window-dots"><i /><i /><i /></div><code><span>const</span> anagha = {'{'}<br />&nbsp; role: <b>'Full-Stack Dev'</b>,<br />&nbsp; coffee: true<br />{'}'};</code></div>
           <div className="scroll-indicator" onClick={() => go('about')}><span /><small>SCROLL</small><ArrowDown size={14} /></div>
           </motion.div>
         </motion.div>
