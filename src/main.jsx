@@ -288,7 +288,7 @@ function App() {
     <ConstellationBackground />
 
     <AnimatePresence>
-      {loading && <motion.div className="loader" initial={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: .65 } }}>
+      {loading && <motion.div className="loader" initial={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: prefersReducedMotion ? 0 : .65 } }}>
         <div className="loader-inner">
           <div className="loader-mark">A<span>/&gt;</span></div>
           <div className="loader-terminal"><p><b>$</b> npm run portfolio --env=production</p><p className="loader-check">✓ compiling components</p><p className="loader-check">✓ connecting ideas<span className="cursor-block" /></p></div>
@@ -316,7 +316,7 @@ function App() {
     <main>
       <section id="home" className="hero page-section" ref={heroRef}>
         <div className="hero-grid" />
-        <motion.div className="hero-content" variants={heroStagger} initial="hidden" animate="show">
+        <motion.div className="hero-content" variants={heroStagger} initial={prefersReducedMotion ? false : "hidden"} animate="show">
           <motion.div className="availability" variants={heroItem}><i /> Open to learning & opportunities</motion.div>
           <motion.p className="terminal-line" variants={heroItem}><span>~/anagha $</span> whoami</motion.p>
           <motion.h1 variants={heroItem}>Anagha<br /><em>Ajidev</em></motion.h1>
@@ -330,7 +330,7 @@ function App() {
           </motion.div>
           <motion.div className="hero-location" variants={heroItem}><MapPin size={14} /> Kerala, India <i /> MCA · 2025—2027</motion.div>
         </motion.div>
-        <motion.div className="hero-portrait-wrap" initial={{ opacity: 0, scale: .94, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1, delay: .45, ease: [.22, 1, .36, 1] }}>
+        <motion.div className="hero-portrait-wrap" initial={prefersReducedMotion ? false : { opacity: 0, scale: .94, y: 24 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: prefersReducedMotion ? 0 : 1, delay: prefersReducedMotion ? 0 : .45, ease: [.22, 1, .36, 1] }}>
           <motion.div className="hero-parallax-layer" style={{ y: prefersReducedMotion ? 0 : heroParallaxY }}>
           <div className="portrait-aura" />
           <div className="orbit orbit-a" /><div className="orbit orbit-b" />
@@ -352,9 +352,9 @@ function App() {
           </div>
           <div className="about-copy" ref={aboutCopyRef}>
             <div className="file-tabs"><span className="active">about.md</span><span>stack.json</span><span className="file-dots">● ● ●</span></div>
-            <motion.p className="about-lead" style={prefersReducedMotion ? undefined : { y: aboutTextY1 }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: .7, delay: .08, ease: [.22, 1, .36, 1] }}>I'm an MCA student at the Federal Institute of Science and Technology (FISAT), with a foundation in computer applications and a growing focus on full-stack development.</motion.p>
-            <motion.p style={prefersReducedMotion ? undefined : { y: aboutTextY2 }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: .7, delay: .2, ease: [.22, 1, .36, 1] }}>I like taking an idea from its first sketch to a working application — thinking through the user experience, building the interface, connecting the backend and shaping the data behind it. My projects have given me hands-on experience across web and mobile development, databases, APIs, GPS-based services and blockchain verification.</motion.p>
-            <motion.p style={prefersReducedMotion ? undefined : { y: aboutTextY3 }} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: .7, delay: .32, ease: [.22, 1, .36, 1] }}>Beyond code, I value collaboration, communication and the willingness to step outside my comfort zone. I believe the best work comes from staying curious, being dependable and improving a little with every build.</motion.p>
+            <motion.p className="about-lead" style={prefersReducedMotion ? undefined : { y: aboutTextY1 }} initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: prefersReducedMotion ? 0 : .7, delay: prefersReducedMotion ? 0 : .08, ease: [.22, 1, .36, 1] }}>I'm an MCA student at the Federal Institute of Science and Technology (FISAT), with a foundation in computer applications and a growing focus on full-stack development.</motion.p>
+            <motion.p style={prefersReducedMotion ? undefined : { y: aboutTextY2 }} initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: prefersReducedMotion ? 0 : .7, delay: prefersReducedMotion ? 0 : .2, ease: [.22, 1, .36, 1] }}>I like taking an idea from its first sketch to a working application — thinking through the user experience, building the interface, connecting the backend and shaping the data behind it. My projects have given me hands-on experience across web and mobile development, databases, APIs, GPS-based services and blockchain verification.</motion.p>
+            <motion.p style={prefersReducedMotion ? undefined : { y: aboutTextY3 }} initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: .35 }} transition={{ duration: prefersReducedMotion ? 0 : .7, delay: prefersReducedMotion ? 0 : .32, ease: [.22, 1, .36, 1] }}>Beyond code, I value collaboration, communication and the willingness to step outside my comfort zone. I believe the best work comes from staying curious, being dependable and improving a little with every build.</motion.p>
             <div className="about-stats"><div><b>03</b><span>Featured projects</span></div><div><b>02</b><span>Degrees in progress / earned</span></div><div><b>∞</b><span>Things to explore</span></div></div>
           </div>
         </div>
@@ -370,7 +370,7 @@ function App() {
             {['Python', 'React', 'Node.js', 'Django', 'Flutter', 'MongoDB', 'MySQL', 'Java', 'Git'].map((s, i) => <span key={s} className={`orbit-tag orbit-tag-${i + 1}`}>{s}</span>)}
           </div>
           <div className="skill-categories">
-            {skillGroups.map((group, i) => <motion.article className="skill-category" key={group.title} variants={reveal} initial="hidden" whileInView="show" viewport={{ once: false, amount: .2 }} transition={{ delay: i * .06 }}>
+            {skillGroups.map((group, i) => <motion.article className="skill-category" key={group.title} variants={reveal} initial={prefersReducedMotion ? "show" : "hidden"} whileInView="show" viewport={{ once: false, amount: .2 }} transition={{ delay: i * .06 }}>
               <div className="category-icon"><group.icon size={19} /></div><div className="category-content"><div className="category-heading"><h3>{group.title}</h3><span>0{i + 1} / STACK</span></div><div className="skill-pills">{group.items.map(item => <span key={item}>{item}</span>)}</div></div>
             </motion.article>)}
           </div>
@@ -382,7 +382,7 @@ function App() {
         <SectionLabel number="03">SELECTED WORK</SectionLabel>
         <div className="section-intro"><h2 className="section-title">Ideas made<br /><em>tangible.</em></h2><p>Each project is a chance to learn a new layer of development and solve a problem from a different angle.</p></div>
         <div className="project-list">
-          {projects.map((project, i) => <motion.article className="project-card" key={project.name} variants={reveal} initial="hidden" whileInView="show" viewport={{ once: false, amount: .18 }}>
+          {projects.map((project, i) => <motion.article className="project-card" key={project.name} variants={reveal} initial={prefersReducedMotion ? "show" : "hidden"} whileInView="show" viewport={{ once: false, amount: .18 }}>
             <TiltCard className={`project-visual project-visual-${i + 1}`}><div className="project-visual-top"><span>~/projects/{project.name.toLowerCase().replaceAll(' ', '-')}</span><span>{project.n} / 03</span></div><div className="project-visual-center"><div className="project-orb"><span>{project.symbol}</span></div><div className="project-orbit-line" /><span className="project-chip">{project.category.split(' · ')[0]}</span></div><div className="project-visual-bottom"><span>ACADEMIC PROJECT</span><span>0{i + 1} — 03</span></div></TiltCard>
             <div className="project-details"><div className="project-kicker"><span>PROJECT {project.n}</span><span>{project.category}</span></div><h3>{project.name}</h3><h4>{project.type}</h4><p>{project.desc}</p><div className="project-highlights">{project.detail.map(d => <span key={d}><CheckCircle2 size={13} />{d}</span>)}</div><div className="project-stack">{project.stack.map(item => <span key={item}>{item}</span>)}</div><a className="project-link" href={project.repo} target="_blank" rel="noreferrer">Explore repository <ArrowUpRight size={16} /></a></div>
           </motion.article>)}
@@ -395,7 +395,7 @@ function App() {
         <div className="section-intro"><h2 className="section-title">Learning is<br /><em>the throughline.</em></h2><p>A timeline of the places, people and experiences that have shaped my path in technology.</p></div>
         <div className="education-terminal"><span className="prompt">$</span> git log --graph --oneline <b>education/</b></div>
         <div className="education-timeline">
-          {education.map((item, i) => <motion.div className={`education-entry ${i % 2 ? 'entry-right' : ''}`} key={item.hash} variants={reveal} initial="hidden" whileInView="show" viewport={{ once: false, amount: .35 }}>
+          {education.map((item, i) => <motion.div className={`education-entry ${i % 2 ? 'entry-right' : ''}`} key={item.hash} variants={reveal} initial={prefersReducedMotion ? "show" : "hidden"} whileInView="show" viewport={{ once: false, amount: .35 }}>
             <div className="timeline-node"><item.icon size={17} /></div>
             <div className="education-card"><div className="education-card-top"><span>{item.period}</span><small><i /> {item.hash}</small></div><h3>{item.title}</h3><p>{item.place}</p><span className="education-tag">{item.tag}</span></div>
           </motion.div>)}
@@ -407,7 +407,7 @@ function App() {
         <div className="section-intro"><h2 className="section-title">Small milestones.<br /><em>Meaningful momentum.</em></h2><p>Learning doesn't happen only in a classroom. These experiences have helped me build confidence, share ideas and contribute to a community.</p></div>
         <div className="achievement-layout">
           <div className="research-feature"><div className="research-glow" /><span className="research-icon"><FileText size={21} /></span><span className="research-kicker">RESEARCH / NCCMEA 2024</span><h3>Shielding the Connected World: <em>A Deep Dive into IoT Vulnerabilities and Safeguards</em></h3><p>Research paper presented at the National Conference.</p><div className="research-footer"><span>RESEARCH PAPER</span><span>2024</span></div></div>
-          <div className="achievement-list">{awards.map((item, i) => <motion.div className="achievement-item" key={item.n} variants={reveal} initial="hidden" whileInView="show" viewport={{ once: false, amount: .3 }} transition={{ delay: i * .05 }}><span className="achievement-icon"><item.icon size={19} /></span><div><h3>{item.title}</h3><p>{item.sub}</p></div><span className="achievement-number">{item.n}</span></motion.div>)}</div>
+          <div className="achievement-list">{awards.map((item, i) => <motion.div className="achievement-item" key={item.n} variants={reveal} initial={prefersReducedMotion ? "show" : "hidden"} whileInView="show" viewport={{ once: false, amount: .3 }} transition={{ delay: i * .05 }}><span className="achievement-icon"><item.icon size={19} /></span><div><h3>{item.title}</h3><p>{item.sub}</p></div><span className="achievement-number">{item.n}</span></motion.div>)}</div>
         </div>
         <div className="certifications"><div className="certification-heading"><div><span className="eyebrow">CONTINUOUS LEARNING</span><h3>Certifications & credentials</h3></div><span>05 / LEARNING LOG</span></div><div className="certification-grid">{certificates.map(([title, source, credentialUrl], i) => <div className="certification-item" key={title}><span>0{i + 1}</span><div>{credentialUrl ? <a className="certification-link" href={credentialUrl} target="_blank" rel="noreferrer" aria-label={`${title}, view credential`}><b>{title}</b><small>{source}</small></a> : <><b>{title}</b><small>{source}</small></>}</div>{credentialUrl && <ArrowUpRight size={15} />}</div>)}</div></div>
       </section>
@@ -424,3 +424,4 @@ function App() {
 }
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);
+
